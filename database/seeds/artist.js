@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import faker from 'faker';
-import { GENRES } from '../constants';
+const _ = require('lodash');
+const faker = require('faker');
+var _constants = require('../constants');
 
 module.exports = function() {
   return {
@@ -16,9 +16,10 @@ module.exports = function() {
     retired: faker.random.boolean(),
     albums: getAlbums()
   };
-}
+};
 
 function getAlbums() {
+  console.log('ivan');
   return _.times(randomBetween(0, 5), () => {
     const copiesSold = randomBetween(0, 1000000);
 
@@ -41,7 +42,7 @@ function getAlbumImage() {
 }
 
 function getGenre() {
-  return randomEntry(GENRES);
+  return randomEntry(_constants);
 }
 
 function randomEntry(array) {
@@ -49,5 +50,5 @@ function randomEntry(array) {
 }
 
 function randomBetween(min, max) {
-  return ~~(Math.random() * (max-min)) + min;
+  return ~~(Math.random() * (max - min)) + min;
 }
