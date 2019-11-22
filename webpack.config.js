@@ -1,28 +1,28 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require("path");
 
 const VENDOR_LIBS = [
-  'react',
-  'faker',
-  'lodash',
-  'react-dom',
-  'react-input-range',
-  'react-redux',
-  'react-router',
-  'redux',
-  'redux-form',
-  'redux-thunk'
+  "react",
+  "faker",
+  "lodash",
+  "react-dom",
+  "react-input-range",
+  "react-redux",
+  "react-router",
+  "redux",
+  "redux-form",
+  "redux-thunk"
 ];
 
 const config = {
   entry: {
-    bundle: './src/index.js',
+    bundle: "./src/index.js",
     vendor: VENDOR_LIBS
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js'
+    path: path.join(__dirname, "dist"),
+    filename: "[name].[chunkhash].js"
   },
   module: {
     rules: [
@@ -30,14 +30,14 @@ const config = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ["@babel/preset-env", "@babel/preset-react"]
           }
         }
       },
       {
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
         test: /\.css$/
       }
     ]
@@ -46,9 +46,9 @@ const config = {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
-          test: 'vendor',
-          name: 'vendor',
+          chunks: "initial",
+          test: "vendor",
+          name: "vendor",
           enforce: true
         }
       }
@@ -56,7 +56,10 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: "src/index.html"
+    }),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
     })
   ]
 };
